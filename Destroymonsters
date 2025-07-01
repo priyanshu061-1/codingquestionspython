@@ -1,0 +1,31 @@
+n = int(input())       # Number of levels
+lev = int(input())     # Starting power level
+
+p = []  # Required power for each level
+b = []  # Bonus power for each level
+a = []  # Combined list of [required_power, bonus]
+ans = 0
+
+# Input required powers
+for i in range(n):
+    p.append(int(input()))
+
+# Input bonus powers
+for j in range(n):
+    b.append(int(input()))
+
+# Combine required power and bonus for each level
+for k in range(n):
+    a.append([p[k], b[k]])
+
+# Sort levels by required power
+a.sort()
+
+# Try to play each level
+for z in a:
+    if z[0] > lev:
+        break
+    lev += z[1]
+    ans += 1
+
+print(ans)
