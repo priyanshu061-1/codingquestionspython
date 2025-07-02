@@ -1,0 +1,16 @@
+def first_non_repeating_char(s):
+    # Step 1: Count frequency of each character
+    freq = {}
+    for char in s:
+        freq[char] = freq.get(char, 0) + 1
+
+    # Step 2: Find the first non-repeating character
+    for char in s:
+        if freq[char] == 1:
+            return char
+
+    return None
+
+# Test examples
+print(first_non_repeating_char("aabbcddde"))  # Output: c
+print(first_non_repeating_char("aabbcc"))     # Output: None
