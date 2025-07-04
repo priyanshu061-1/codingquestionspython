@@ -1,0 +1,8 @@
+def count_characters(s):
+    count = {}
+    for char in s:
+        count[char] = count.get(char, 0) + 1
+    return count
+
+print(count_characters("banana"))
+# Output: {'b': 1, 'a': 3, 'n': 2}
