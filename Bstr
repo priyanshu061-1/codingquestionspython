@@ -1,0 +1,88 @@
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    # Insert a new node
+    def insert(self, key):
+        self.root = self._insert(self.root, key)
+
+    def _insert(self, root, key):
+        if root is None:
+            return Node(key)
+        if key < root.key:
+            root.left = self._insert(root.left, key)
+        elif key > root.key:
+            root.right = self._insert(root.right, key)
+        return root
+
+    # Inorder traversal
+    def inorder(self):
+        self._inorder(self.root)
+        print()
+
+    def _inorder(self, root):
+        if root:
+            self._inorder(root.left)
+            print(root.key, end=' ')
+            self._inorder(root.right)
+
+    # Search for a key
+    def search(self, key):
+        return self._search(self.root, key)
+
+    def _search(self, root, key):
+        if root is None or root.key == key:
+            return root
+        if key < root.key:
+            return self._search(root.left, key)
+        return self._search(root.right, key)
+
+    # Delete a node
+    def delete(self, key):
+        self.root = self._delete(self.root, key)
+
+    def _delete(self, root, key):
+        if not root:
+            return root
+
+        if key < root.key:
+            root.left = self._delete(root.left, key)
+        elif key > root.key:
+            root.right = self._delete(root.right, key)
+        else:
+            # Node with one or no child
+            if not root.left:
+                return root.right
+            elif not root.right:
+                return root.left
+            # Node with two children
+            min_larger_node = self._min_value_node(root.right)
+            root.key = min_larger_node.key
+            root.right = self._delete(root.right, min_larger_node.key)
+        return root
+
+    def _min_value_node(self, root):
+        current = root
+        while current.left:
+            current = current.left
+        return current
+
+# Example usage:
+tree = BST()
+for key in [50, 30, 70, 20, 40, 60, 80]:
+    tree.insert(key)
+
+print("Inorder Traversal:")
+tree.inorder()
+
+print("Search 60:", "Found" if tree.search(60) else "Not Found")
+
+tree.delete(70)
+print("After deleting 70:")
+tree.inorder()
