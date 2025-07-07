@@ -1,0 +1,21 @@
+def is_special_number(num):
+    def factorial(n):
+        if n == 0 or n == 1:
+            return 1
+        fact = 1
+        for i in range(2, n + 1):
+            fact *= i
+        return fact
+
+    sum_of_factorials = 0
+    for digit in str(num):
+        sum_of_factorials += factorial(int(digit))
+    
+    if sum_of_factorials == num:
+        return "Yes"
+    else:
+        return "No"
+
+# Test the function
+num = int(input("Enter a number: "))
+print(is_special_number(num))
