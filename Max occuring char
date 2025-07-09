@@ -1,0 +1,16 @@
+def max_occuring_char(s):
+    s = s.lower()  # Ignore case
+    freq = {}
+
+    for char in s:
+        if char.isalpha():  # Ignore spaces and non-alphabet
+            freq[char] = freq.get(char, 0) + 1
+
+    max_char = max(freq, key=freq.get)
+    max_count = freq[max_char]
+
+    print(f"The maximum occurring character is '{max_char}' with frequency {max_count}")
+
+# Example usage
+input_str = "Accenture Coding Interview"
+max_occuring_char(input_str)
