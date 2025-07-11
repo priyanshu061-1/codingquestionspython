@@ -1,0 +1,2 @@
+def are_anagrams_sorted(list1, list2):
+    return list1 == list2
